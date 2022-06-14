@@ -20,26 +20,36 @@ class RightColumn extends StatelessWidget {
           flex: 6,
           child: Column(
             children: [
-              TextTile(
-                text: "SANDWHICH",
-                onTap: () => {
-                  BlocProvider.of<FutureBloc>(context)
-                      .add(ItemCategory.sandwich),
-                },
-              ),
-              TextTile(
-                text: "DRINKS",
-                onTap: () => {
-                  BlocProvider.of<FutureBloc>(context).add(ItemCategory.drinks),
-                },
-              ),
-              TextTile(
-                bgColor: const Color.fromARGB(255, 236, 122, 48),
-                text: "FIXINS",
-                onTap: () => {
-                  BlocProvider.of<FutureBloc>(context).add(ItemCategory.fixins),
-                },
-              ),
+              BlocBuilder<FutureBloc, ItemsState>(builder: (context, state) {
+                return TextTile(
+                  bgColor: state.sandwhichColor,
+                  text: "SANDWHICH",
+                  onTap: () => {
+                    BlocProvider.of<FutureBloc>(context)
+                        .add(ItemCategory.sandwich),
+                  },
+                );
+              }),
+              BlocBuilder<FutureBloc, ItemsState>(builder: (context, state) {
+                return TextTile(
+                  bgColor: state.drinksColor,
+                  text: "DRINKS",
+                  onTap: () => {
+                    BlocProvider.of<FutureBloc>(context)
+                        .add(ItemCategory.drinks),
+                  },
+                );
+              }),
+              BlocBuilder<FutureBloc, ItemsState>(builder: (context, state) {
+                return TextTile(
+                  bgColor: state.fixinsColor,
+                  text: "FIXINS",
+                  onTap: () => {
+                    BlocProvider.of<FutureBloc>(context)
+                        .add(ItemCategory.fixins),
+                  },
+                );
+              }),
             ],
           ),
         ),
